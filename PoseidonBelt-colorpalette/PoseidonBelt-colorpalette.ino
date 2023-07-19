@@ -7,7 +7,7 @@
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
 
-#define UPDATES_PER_SECOND 100
+#define UPDATES_PER_SECOND 200
 CRGBPalette16 gPal;
 #define COOLING  55
 #define FRAMES_PER_SECOND 60
@@ -59,7 +59,9 @@ void setup() {
   currentPalette = RainbowColors_p;
   currentBlending = LINEARBLEND;
 
-  gPal = CRGBPalette16( CRGB::Black, CRGB::Blue, CRGB::Aqua,  CRGB::White);
+  gPal = CRGBPalette16( CRGB::Black, CRGB::Pink, CRGB::Pink,  CRGB::White);
+
+  //FillLEDsFromPaletteColors();
 
    readPot();
 }
@@ -72,28 +74,28 @@ int animationMode = 0;
 void loop()
 {
  readPot();
-  unsigned long currentMillis_changeMode = millis();
+  //unsigned long currentMillis_changeMode = millis();
 
   //60000
-  if (currentMillis_changeMode - previousMillis_changeMode >= 180000) {
-    // save the last time you blinked the LED
-    previousMillis_changeMode = currentMillis_changeMode;
+  // if (currentMillis_changeMode - previousMillis_changeMode >= 180000) {
+  //   // save the last time you blinked the LED
+  //   previousMillis_changeMode = currentMillis_changeMode;
 
-    if (animationMode == 0)
-    {
-      animationMode = 1;
-    } else {
-      animationMode = 0;
-    }
+  //   if (animationMode == 0)
+  //   {
+  //     animationMode = 1;
+  //   } else {
+  //     animationMode = 0;
+  //   }
 
-    Serial.println(animationMode);
+  //   Serial.println(animationMode);
 
 
-  }
+  // }
 
-  if (animationMode == 0)
-  {
-    currentPalette = CloudColors_p;           currentBlending = LINEARBLEND;
+  //if (animationMode == 0)
+  //{
+    currentPalette = myRedWhiteBluePalette_p;           currentBlending = LINEARBLEND;
     static uint8_t startIndex = 0;
     startIndex = startIndex + 1; /* motion speed */
 
@@ -101,12 +103,12 @@ void loop()
 
     FastLED.show();
     FastLED.delay(1000 / UPDATES_PER_SECOND);
-  } else if (animationMode == 1) {
-      random16_add_entropy( random());
-      Fire2012WithPalette();
-      FastLED.show(); // display this frame
-      FastLED.delay(1000 / FRAMES_PER_SECOND);
-    }
+  // } else if (animationMode == 1) {
+  //     random16_add_entropy( random());
+  //     Fire2012WithPalette();
+  //     FastLED.show(); // display this frame
+  //     FastLED.delay(1000 / FRAMES_PER_SECOND);
+  //   }
   // ChangePalettePeriodically();
 
   //currentPalette = SetupBlackAndWhiteStripedPalette;
@@ -259,24 +261,24 @@ void SetupPurpleAndGreenPalette()
 // takes up 64 bytes of flash.
 const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM =
 {
-  CRGB::Red,
+  CRGB::DeepPink,
   CRGB::Gray, // 'white' is too bright compared to red and blue
-  CRGB::Blue,
+  CRGB::DeepPink,
   CRGB::Black,
 
-  CRGB::Red,
+  CRGB::DeepPink,
   CRGB::Gray,
-  CRGB::Blue,
+  CRGB::DeepPink,
   CRGB::Black,
 
-  CRGB::Red,
-  CRGB::Red,
+  CRGB::DeepPink,
+  CRGB::DeepPink,
+  CRGB::DeepPink,
+  CRGB::DeepPink,
+  CRGB::DeepPink,
+  CRGB::DeepPink,
   CRGB::Gray,
-  CRGB::Gray,
-  CRGB::Blue,
-  CRGB::Blue,
-  CRGB::Black,
-  CRGB::Black
+  CRGB::Gray
 };
 
 
