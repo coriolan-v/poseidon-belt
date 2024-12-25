@@ -1,6 +1,6 @@
 #include <FastLED.h>
 
-#define LED_PIN     A0
+#define LED_PIN     14
 #define NUM_LEDS    200
 #define BRIGHTNESS  64
 #define LED_TYPE    WS2811
@@ -40,7 +40,7 @@ TBlendType    currentBlending;
 
 extern CRGBPalette16 myRedWhiteBluePalette;
 extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
-int sensorPin = A11;    // select the input pin for the potentiometer
+int sensorPin = A0;    // select the input pin for the potentiometer
 
 bool gReverseDirection = false;
 
@@ -71,7 +71,7 @@ int animationMode = 0;
 
 void loop()
 {
- readPot();
+ //readPot();
   unsigned long currentMillis_changeMode = millis();
 
   //60000
@@ -91,8 +91,8 @@ void loop()
 
   }
 
-  if (animationMode == 0)
-  {
+  // if (animationMode == 0)
+  // {
     currentPalette = CloudColors_p;           currentBlending = LINEARBLEND;
     static uint8_t startIndex = 0;
     startIndex = startIndex + 1; /* motion speed */
@@ -101,12 +101,12 @@ void loop()
 
     FastLED.show();
     FastLED.delay(1000 / UPDATES_PER_SECOND);
-  } else if (animationMode == 1) {
-      random16_add_entropy( random());
-      Fire2012WithPalette();
-      FastLED.show(); // display this frame
-      FastLED.delay(1000 / FRAMES_PER_SECOND);
-    }
+  // } else if (animationMode == 1) {
+  //     random16_add_entropy( random());
+  //     Fire2012WithPalette();
+  //     FastLED.show(); // display this frame
+  //     FastLED.delay(1000 / FRAMES_PER_SECOND);
+  //   }
   // ChangePalettePeriodically();
 
   //currentPalette = SetupBlackAndWhiteStripedPalette;
